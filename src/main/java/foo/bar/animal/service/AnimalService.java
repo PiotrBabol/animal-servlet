@@ -53,7 +53,7 @@ public class AnimalService {
         animalList.add(animal);
     }
 
-    public void remove(String idToRemove) {
+    public void remove(Integer idToRemove) {
         animalList = animalList
                 .stream()
                 .filter(animal -> !animal.getId().equals(idToRemove))

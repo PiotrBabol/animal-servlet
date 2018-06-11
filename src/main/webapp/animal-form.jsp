@@ -9,12 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <h1>form</h1>
-<form method="POST" action="${pageContext.request.contextPath}/Animal">
+<form method="POST" action="${pageContext.request.contextPath}/Animal/">
     <div class="container">
         <p>Insert an animal into collection</p>
         <div class="form-group">

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Animal", urlPatterns = {"/", "/add", "/list", "/det"})
+@WebServlet(name = "Animal", urlPatterns = {"/", "/add", "/list", "/det","/remove"})
 public class AnimalServlet extends HttpServlet {
 
     private static final String TEXT_PLAIN = "text/plain;charset=UTF-8";
@@ -22,8 +22,9 @@ public class AnimalServlet extends HttpServlet {
     private static final String INDEX_JSP = "index.jsp";
     private static final String NAME = "animalName";
     private static final String KINGDOM = "kingdom";
-    private static final String ANIMAL = "Animal";
+    private static final String ANIMAL = "/Animal";
     public static final String ID = "id";
+    public static final String ANIMAL_REMOVE_JSP = "animal-remove.jsp";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(TEXT_PLAIN);
@@ -36,8 +37,12 @@ public class AnimalServlet extends HttpServlet {
                 request.getRequestDispatcher(ANIMAL_LIST_JSP).forward(request, response);
                 break;
             case "/det":
-
                 request.getRequestDispatcher(ANIMAL_DETAILS_JSP).forward(request, response);
+                break;
+            case "/remove":
+                String removeId = request.getParameter(ID);
+                request.setAttribute(ID,removeId);
+                request.getRequestDispatcher(ANIMAL_REMOVE_JSP).forward(request, response);
                 break;
             default:
                 request.getRequestDispatcher(INDEX_JSP).forward(request, response);
@@ -46,10 +51,16 @@ public class AnimalServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter(NAME);
-        String kingdom = request.getParameter(KINGDOM);
-        AnimalService.animalList.add(new Animal(name, AnimalKingdom.valueOf(kingdom)));
-        response.sendRedirect(ANIMAL);
+        if(request.getServletPath().equals("/remove")){
+            String animalToRemove =request.getParameter("animalToRemoveId");
+            AnimalService.animalList.remove(Integer.valueOf(animalToRemove).intValue());
+            response.sendRedirect(ANIMAL);
+        }else{
+            String name = request.getParameter(NAME);
+            String kingdom = request.getParameter(KINGDOM);
+            AnimalService.animalList.add(new Animal(name, AnimalKingdom.valueOf(kingdom)));
+            response.sendRedirect(ANIMAL);
+        }
     }
 
     @Override

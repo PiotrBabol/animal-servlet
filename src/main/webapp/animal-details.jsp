@@ -29,6 +29,7 @@
         <%-- TODO wykozystanie form i poporostu wypelnic pozostale wypelnic mozna value="${blabla}
                          mozna tez dac uktrye pole identyfikatora itd "--%>
         <p><c:out value="${edit}"/></p>
+        <p><a href="remove?id=${AnimalService.animalList.get(param.id).id}">Remove</a></p>
 
     </div>
 </div>
