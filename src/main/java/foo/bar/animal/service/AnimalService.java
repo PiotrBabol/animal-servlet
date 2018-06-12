@@ -56,8 +56,19 @@ public class AnimalService {
     public void remove(Integer idToRemove) {
         animalList = animalList
                 .stream()
-                .filter(animal -> !animal.getId().equals(idToRemove))
+                .filter(animal -> !animal.getId().equals(idToRemove.toString()))
                 .collect(Collectors.toList());
+        fixIds();
+    }
+
+    public void set(Integer id, Animal animal) {
+        animalList.set(id, animal);
+    }
+
+    public void fixIds(){
+        for (int i = 0; i < animalList.size(); i++) {
+            animalList.get(i).setId(String.valueOf(i));
+        }
     }
 
 

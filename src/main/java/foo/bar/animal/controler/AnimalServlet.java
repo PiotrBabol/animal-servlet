@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Animal", urlPatterns = {"/", "/add", "/list", "/det","/remove"})
+@WebServlet(name = "Animal", urlPatterns = {"/", "/add", "/list", "/det", "/remove", "/edit"})
 public class AnimalServlet extends HttpServlet {
 
     private static final String TEXT_PLAIN = "text/plain;charset=UTF-8";
@@ -23,17 +23,22 @@ public class AnimalServlet extends HttpServlet {
     private static final String NAME = "animalName";
     private static final String KINGDOM = "kingdom";
     private static final String ANIMAL = "/Animal";
-    public static final String ID = "id";
-    public static final String ANIMAL_REMOVE_JSP = "animal-remove.jsp";
+    private static final String ID = "id";
+    private static final String ANIMAL_REMOVE_JSP = "animal-remove.jsp";
+    private static final String ANIMAL_DESCRIPTION = "animalDescription";
+    private static final String ANIMAL_TO_REMOVE_ID = "animalToRemoveId";
+
+    private AnimalService animalService;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(TEXT_PLAIN);
         switch (request.getServletPath()) {
             case "/add":
-                request.setAttribute(ANIMAL_LIST, AnimalService.animalList);
+                request.setAttribute(ANIMAL_LIST,animalService.findAll());
                 request.getRequestDispatcher(ANIMAL_FORM_JSP).forward(request, response);
                 break;
             case "/list":
+                request.setAttribute(ANIMAL_LIST,animalService.findAll());
                 request.getRequestDispatcher(ANIMAL_LIST_JSP).forward(request, response);
                 break;
             case "/det":
@@ -41,8 +46,13 @@ public class AnimalServlet extends HttpServlet {
                 break;
             case "/remove":
                 String removeId = request.getParameter(ID);
-                request.setAttribute(ID,removeId);
+                request.setAttribute(ID, removeId);
                 request.getRequestDispatcher(ANIMAL_REMOVE_JSP).forward(request, response);
+                break;
+            case "/edit":
+                removeId = request.getParameter(ID);
+                request.setAttribute(ID, removeId);
+                request.getRequestDispatcher(ANIMAL_FORM_JSP).forward(request, response);
                 break;
             default:
                 request.getRequestDispatcher(INDEX_JSP).forward(request, response);
@@ -51,21 +61,40 @@ public class AnimalServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if(request.getServletPath().equals("/remove")){
-            String animalToRemove =request.getParameter("animalToRemoveId");
-            AnimalService.animalList.remove(Integer.valueOf(animalToRemove).intValue());
-            response.sendRedirect(ANIMAL);
-        }else{
-            String name = request.getParameter(NAME);
-            String kingdom = request.getParameter(KINGDOM);
-            AnimalService.animalList.add(new Animal(name, AnimalKingdom.valueOf(kingdom)));
-            response.sendRedirect(ANIMAL);
+        if (request.getServletPath().equals("/remove")) {
+            animalRemove(request, response);
+        } else {
+            animalForm(request, response);
         }
+    }
+
+    private void animalForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = request.getParameter(NAME).toLowerCase();
+        String kingdom = request.getParameter(KINGDOM);
+        String details = request.getParameter(ANIMAL_DESCRIPTION);
+        if (request.getParameter(ID) == null || request.getParameter(ID).equals("")) {
+            animalService.add(new Animal(name, AnimalKingdom.valueOf(kingdom), details));
+        } else {
+            String animalToEdit = request.getParameter(ID);
+            Animal temp = animalService.findAll().get(Integer.valueOf(animalToEdit));
+            temp.setDetails(details);
+            temp.setName(name);
+            temp.setKingdom(AnimalKingdom.valueOf(kingdom));
+            animalService.set(Integer.valueOf(animalToEdit), temp);
+        }
+        response.sendRedirect(ANIMAL);
+    }
+
+    private void animalRemove(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String animalToRemove = request.getParameter(ANIMAL_TO_REMOVE_ID);
+        animalService.remove(Integer.valueOf(animalToRemove));
+        response.sendRedirect(ANIMAL);
     }
 
     @Override
     public void init() {
         System.out.println("Servlet " + this.getServletName() + " has started");
+        animalService = new AnimalService();
     }
 
     @Override

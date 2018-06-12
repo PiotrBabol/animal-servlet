@@ -8,11 +8,11 @@ import java.util.UUID;
 
 public class Animal implements Serializable {
 
-    String id;
-    String name;
-    AnimalKingdom kingdom;
-    String details;
-    boolean editeble;
+    private String id;
+    private String name;
+    private AnimalKingdom kingdom;
+    private String details;
+    private boolean editeble;
 
     public String getDetails() {
         return details;
@@ -49,6 +49,14 @@ public class Animal implements Serializable {
         this.name = name;
         this.kingdom = kingdom;
         this.details = details;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", kingdom=" + kingdom ;
     }
 
     public String getId() {

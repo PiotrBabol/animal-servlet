@@ -22,21 +22,20 @@
             <th>name</th>
             <th>kingdom</th>
         </tr>
-        <c:forEach items="${AnimalService.animalList}" var="nameKingdom">
+        <c:forEach items="${animalList}" var="nameKingdom">
             <tr>
                 <td>
-                    <a href="<c:url value = "/det"><c:param name = "id" value = "${nameKingdom.id}"/></c:url>">
-                        <c:out value="${nameKingdom.name}"/>
-                    </a>
+                    <a href="${pageContext.request.contextPath}/det?id=${nameKingdom.getId()}"><c:out value="${nameKingdom.getName()}"/></a>
                 </td>
-
-                <td><c:out value="${nameKingdom.getKingdom().toString().toLowerCase()}"/></td>
+                <td>
+                    <c:out value="${nameKingdom.getKingdom().toString().toLowerCase()}"/>
+                </td>
 
             </tr>
         </c:forEach>
     </table>
 </div>
-<p><a href="${pageContext.request.contextPath}/Animal">HOME</a></p>
+<p><a href="${pageContext.request.contextPath}/">HOME</a></p>
 
 </body>
 </html>

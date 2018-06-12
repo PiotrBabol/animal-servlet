@@ -13,7 +13,7 @@
 </head>
 <body>
 <form method="POST" action="${pageContext.request.contextPath}/remove" class="container">
-    <input type="hidden" name="animalToRemoveId" value="${id}">
+    <input type="hidden" name="animalToRemoveId" value="${id}"/>
 
     <h2>Are you sure?</h2>
     <input type="submit" value="Yes"/>

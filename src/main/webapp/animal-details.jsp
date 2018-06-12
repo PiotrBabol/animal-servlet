@@ -22,18 +22,15 @@
     <div>
         <p>id : <c:out value="${param.id}"/></p>
         <p>name : <c:out value="${AnimalService.animalList.get(param.id).getName()}"/></p>
-        <p>kingdom : <c:out value="${AnimalService.animalList.get(param.id).kingdom.toString().toLowerCase()}"/></p>
-        <p>details : <c:out value="${AnimalService.animalList.get(param.id).details}"/></p>
-        <p><c:import url="animal-edit.jsp"
-                     var="edit"/></p>
-        <%-- TODO wykozystanie form i poporostu wypelnic pozostale wypelnic mozna value="${blabla}
-                         mozna tez dac uktrye pole identyfikatora itd "--%>
-        <p><c:out value="${edit}"/></p>
-        <p><a href="remove?id=${AnimalService.animalList.get(param.id).id}">Remove</a></p>
+        <p>kingdom : <c:out value="${AnimalService.animalList.get(param.id).getKingdom().toString().toLowerCase()}"/></p>
+        <p>details : <c:out value="${AnimalService.animalList.get(param.id).getDetails()}"/></p>
+        <p><a href="edit?id=${AnimalService.animalList.get(param.id).getId()}">Edit</a></p>
+        <p><a href="remove?id=${AnimalService.animalList.get(param.id).getId()}">Remove</a></p>
 
     </div>
 </div>
-<p><a href="${pageContext.request.contextPath}/Animal">HOME</a></p>
+<p><a href="${pageContext.request.contextPath}/">HOME</a></p>
+
 
 </body>
 </html>
