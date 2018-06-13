@@ -27,6 +27,7 @@ public class AnimalServlet extends HttpServlet {
     private static final String ANIMAL_REMOVE_JSP = "animal-remove.jsp";
     private static final String ANIMAL_DESCRIPTION = "animalDescription";
     private static final String ANIMAL_TO_REMOVE_ID = "animalToRemoveId";
+    public static final String ANIMAL_DETAILS = "animalDetails";
 
     private AnimalService animalService;
 
@@ -34,14 +35,16 @@ public class AnimalServlet extends HttpServlet {
         response.setContentType(TEXT_PLAIN);
         switch (request.getServletPath()) {
             case "/add":
-                request.setAttribute(ANIMAL_LIST,animalService.findAll());
+                request.setAttribute(ANIMAL_LIST, animalService.findAll());
                 request.getRequestDispatcher(ANIMAL_FORM_JSP).forward(request, response);
                 break;
             case "/list":
-                request.setAttribute(ANIMAL_LIST,animalService.findAll());
+                request.setAttribute(ANIMAL_LIST, animalService.findAll());
                 request.getRequestDispatcher(ANIMAL_LIST_JSP).forward(request, response);
                 break;
             case "/det":
+                String detId = request.getParameter(ID);
+                request.setAttribute(ANIMAL_DETAILS, animalService.findOne(detId));
                 request.getRequestDispatcher(ANIMAL_DETAILS_JSP).forward(request, response);
                 break;
             case "/remove":
@@ -51,6 +54,7 @@ public class AnimalServlet extends HttpServlet {
                 break;
             case "/edit":
                 removeId = request.getParameter(ID);
+                request.setAttribute("animalEdit", animalService.findOne(removeId));
                 request.setAttribute(ID, removeId);
                 request.getRequestDispatcher(ANIMAL_FORM_JSP).forward(request, response);
                 break;
@@ -87,7 +91,7 @@ public class AnimalServlet extends HttpServlet {
 
     private void animalRemove(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String animalToRemove = request.getParameter(ANIMAL_TO_REMOVE_ID);
-        animalService.remove(Integer.valueOf(animalToRemove));
+        animalService.remove(animalToRemove);
         response.sendRedirect(ANIMAL);
     }
 

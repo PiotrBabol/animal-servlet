@@ -20,12 +20,18 @@
 <h1>details</h1>
 <div class="container">
     <div>
-        <p>id : <c:out value="${param.id}"/></p>
-        <p>name : <c:out value="${AnimalService.animalList.get(param.id).getName()}"/></p>
-        <p>kingdom : <c:out value="${AnimalService.animalList.get(param.id).getKingdom().toString().toLowerCase()}"/></p>
-        <p>details : <c:out value="${AnimalService.animalList.get(param.id).getDetails()}"/></p>
-        <p><a href="edit?id=${AnimalService.animalList.get(param.id).getId()}">Edit</a></p>
-        <p><a href="remove?id=${AnimalService.animalList.get(param.id).getId()}">Remove</a></p>
+        <p>id : ${param.id}</p>
+        <p>name : ${animalDetails.getName()}</p>
+        <p>kingdom : ${animalDetails.getKingdom().toString().toLowerCase()}</p>
+        <p>details : ${animalDetails.getDetails()}</p>
+        <c:if test="${!animalDetails.getId().equals('-1')}">
+            <p>
+            <a href="edit?id=${animalDetails.getId()}">Edit</a>
+            </p>
+            <p>
+                <a href="remove?id=${animalDetails.getId()}">Remove</a>
+            </p>
+        </c:if>
 
     </div>
 </div>

@@ -36,10 +36,10 @@ public class AnimalService {
         animalList.add(new Animal("jellyfish", AnimalKingdom.INVERTABRATES, "Jellyfish is the informal common name given to the medusa-phase of certain gelatinous members of the subphylum Medusozoa, a major part of the phylum Cnidaria. Jellyfish are mainly free-swimming marine animals with umbrella-shaped bells and trailing tentacles, although a few are not mobile, being anchored to the seabed by stalks. The bell can pulsate to provide propulsion and highly efficient locomotion. The tentacles are armed with stinging cells and may be used to capture prey and defend against predators. Jellyfish have a complex life cycle; the medusa is normally the sexual phase, the planula larva can disperse widely and is followed by a sedentary polyp phase."));
     }
 
-    public Animal findOne(String name) {
+    public Animal findOne(String Id) {
         return animalList
                 .stream()
-                .filter(n -> n.getName().equals(name))
+                .filter(n -> n.getId().equals(Id))
                 .findFirst()
                 .orElse(UNKNOWN);
 
@@ -53,12 +53,11 @@ public class AnimalService {
         animalList.add(animal);
     }
 
-    public void remove(Integer idToRemove) {
+    public void remove(String idToRemove) {
         animalList = animalList
                 .stream()
-                .filter(animal -> !animal.getId().equals(idToRemove.toString()))
+                .filter(animal -> !animal.getId().equals(idToRemove))
                 .collect(Collectors.toList());
-        fixIds();
     }
 
     public void set(Integer id, Animal animal) {

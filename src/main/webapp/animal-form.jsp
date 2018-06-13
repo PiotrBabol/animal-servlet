@@ -33,7 +33,7 @@
             Kingdom: <select name="kingdom">
                 <c:forTokens items="REPTILES,FISH,AMPHIBIANS,BIRDS,MAMMALS,INVERTABRATES" delims="," var="nameKingdom">
                     <option value="<c:out value="${nameKingdom}"/>"
-                            <c:if test="${nameKingdom.equals(AnimalService.animalList.get(param.id).getKingdom().toString())}"> selected</c:if>>
+                            <c:if test="${nameKingdom.equals(animalEdit.getKingdom().toString())}"> selected</c:if>>
                         <c:out value="${nameKingdom}"/>
                     </option>
                 </c:forTokens>
@@ -41,12 +41,12 @@
         </div>
         <div class="form-group">
             Name:<input type="text" placeholder="Animal name..." name="animalName" <c:if
-                test="${param.id != null || param.id.equals('')}"> value="${AnimalService.animalList.get(param.id).getName()}"</c:if>/>
+                test="${param.id != null || param.id.equals('')}"> value="${animalEdit.getName()}"</c:if>/>
         </div>
         <div class="form-group">
             Description:
             <textarea placeholder="Describe the animal here..." name="animalDescription" wrap="soft"
-                      rows="4" cols="50"><c:if test="${param.id != null || param.id.equals('')}">${AnimalService.animalList.get(param.id).getDetails()}</c:if></textarea>
+                      rows="4" cols="50"><c:if test="${param.id != null || param.id.equals('')}">${animalEdit.getDetails()}</c:if></textarea>
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-default" value="Submit"/>

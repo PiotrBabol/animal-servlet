@@ -13,6 +13,6 @@
 
 6.authorisation of edit through editable variable
 
-7.uuid instead of iterable elements of List 
+<s>7. uuid id's instead of id's being indicators of elements position in List.</s> 
 
-
+8.search

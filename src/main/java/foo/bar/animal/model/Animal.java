@@ -39,13 +39,13 @@ public class Animal implements Serializable {
     }
 
     public Animal(String name, AnimalKingdom kingdom) {
-        this.id = String.valueOf(AnimalService.animalList.size());
+        this.id = UUID.randomUUID().toString();
         this.name = name.toLowerCase();
         this.kingdom = kingdom;
     }
 
     public Animal(String name, AnimalKingdom kingdom, String details) {
-        this.id = String.valueOf(AnimalService.animalList.size());
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.kingdom = kingdom;
         this.details = details;
