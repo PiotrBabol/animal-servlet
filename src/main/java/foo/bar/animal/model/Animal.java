@@ -51,6 +51,14 @@ public class Animal implements Serializable {
         this.details = details;
     }
 
+    public Animal(String name, AnimalKingdom kingdom, String details, boolean editeble) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.kingdom = kingdom;
+        this.details = details;
+        this.editeble = editeble;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +

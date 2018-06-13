@@ -9,9 +9,10 @@
 
 4.css + js
 
-5.prevent entering wrong data i.e. empty animal names etc. 
+<s>5.prevent entering wrong data i.e. empty animal names etc.</s>
+* custom error message for entering wrong data and editing or removing animals which were not created by the user
 
-6.authorisation of edit through editable variable
+<s>6.authorisation of edit through editable variable</s>
 
 <s>7. uuid id's instead of id's being indicators of elements position in List.</s> 
 

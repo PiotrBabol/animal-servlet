@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: P B
@@ -13,6 +14,9 @@
 </head>
 <body>
 <form method="POST" action="${pageContext.request.contextPath}/remove" class="container">
+    <c:if test="${!animalRemove.isEditeble()}">
+        <c:redirect url="animal-error.jsp"/>
+    </c:if>
     <input type="hidden" name="animalToRemoveId" value="${id}"/>
 
     <h2>Are you sure?</h2>

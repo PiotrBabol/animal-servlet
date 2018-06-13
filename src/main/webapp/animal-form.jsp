@@ -18,6 +18,9 @@
 <form method="POST" action="${pageContext.request.contextPath}/Animal/">
     <div class="container">
         <%--<c:if test="${pageContext.request.getServletPath().equals(\"/add\")}">--%>
+            <c:if test="${!animalEdit.isEditeble() && animaleEdit!=null}">
+                <c:redirect url="animal-error.jsp"/>
+            </c:if>
 
         <c:if test="${requestScope['javax.servlet.forward.servlet_path'].equals('/add')}">
             <p>Insert an animal into collection</p>
