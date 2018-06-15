@@ -5,7 +5,9 @@
 
 <s>2.remove</s>
 
-3.replace list with db
+3.Add db
+* add hibernate insted of sqllite 
+* searching and inesting into db insted of list 
 
 4.css + js
 
@@ -16,4 +18,4 @@
 
 <s>7. uuid id's instead of id's being indicators of elements position in List.</s> 
 
-8.search
+8.search bar in /list

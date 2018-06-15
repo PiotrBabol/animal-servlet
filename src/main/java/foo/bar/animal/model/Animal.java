@@ -64,7 +64,7 @@ public class Animal implements Serializable {
         return "Animal{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", kingdom=" + kingdom ;
+                ", kingdom=" + kingdom;
     }
 
     public String getId() {
@@ -89,5 +89,13 @@ public class Animal implements Serializable {
 
     public void setKingdom(AnimalKingdom kingdom) {
         this.kingdom = kingdom;
+    }
+
+    public String sql() {
+        int booleanToInt = 0;
+        if (this.editeble) {
+            booleanToInt = 1;
+        }
+        return "('" + this.id + "', '" + this.name + "', '" + this.kingdom.toString() + "', '" + this.details + "', '" + booleanToInt + "')";
     }
 }
