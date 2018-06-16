@@ -2,7 +2,6 @@ package foo.bar.animal.service;
 
 import foo.bar.animal.model.Animal;
 import foo.bar.animal.model.AnimalKingdom;
-import  foo.bar.dbConnetion.ConnectingToSqlite;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

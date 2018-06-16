@@ -49,6 +49,7 @@ public class Animal implements Serializable {
         this.name = name;
         this.kingdom = kingdom;
         this.details = details;
+        this.editeble = true;
     }
 
     public Animal(String name, AnimalKingdom kingdom, String details, boolean editeble) {
@@ -57,6 +58,13 @@ public class Animal implements Serializable {
         this.kingdom = kingdom;
         this.details = details;
         this.editeble = editeble;
+    }
+
+    public Animal(String id, String name, AnimalKingdom kingdom, String details) {
+        this.id = id;
+        this.name = name;
+        this.kingdom = kingdom;
+        this.details = details;
     }
 
     @Override
@@ -92,10 +100,6 @@ public class Animal implements Serializable {
     }
 
     public String sql() {
-        int booleanToInt = 0;
-        if (this.editeble) {
-            booleanToInt = 1;
-        }
-        return "('" + this.id + "', '" + this.name + "', '" + this.kingdom.toString() + "', '" + this.details + "', '" + booleanToInt + "')";
+        return "('" + this.id + "', '" + this.name + "', '" + this.kingdom.toString() + "', '" + this.details + "', '" + this.editeble + "')";
     }
 }

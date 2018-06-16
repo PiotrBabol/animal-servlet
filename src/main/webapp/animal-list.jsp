@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: P B
@@ -17,6 +17,7 @@
 <body>
 <h1>list</h1>
 <div class="table-responsive container">
+    <p>you cannot edit and remove first 6 initial animals</p>
     <table class="table">
         <tr>
             <th>name</th>
