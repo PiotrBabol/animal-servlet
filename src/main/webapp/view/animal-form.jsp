@@ -1,5 +1,6 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ page import="foo.bar.animal.service.AnimalService" %>
+<%@ page import="foo.bar.data.AnimalDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: P B
@@ -17,10 +18,6 @@
 <h1>form</h1>
 <form method="POST" action="${pageContext.request.contextPath}/">
     <div class="container">
-
-        <c:if test="${!animalEdit.isEditeble() && animaleEdit!=null}">
-            <c:redirect url="animal-error.jsp"/>
-        </c:if>
 
         <c:if test="${requestScope['javax.servlet.forward.servlet_path'].equals('/add')}">
             <p>Insert an animal into collection</p>
@@ -56,6 +53,7 @@
         <div class="form-group">
             <input type="submit" class="btn btn-default" value="Submit"/>
         </div>
+
     </div>
 </form>
 

@@ -18,7 +18,6 @@
 <h1> Something has gone wrong </h1>
 
 <div class="container">
-    <p>You cannot edit or remove first 6 animals nor enter an empty name</p>
     <p> You will be redirected to list after 5 s</p>
     <p><a href="${pageContext.request.contextPath}/list">I want to be redirected now</a></p>
 </div>

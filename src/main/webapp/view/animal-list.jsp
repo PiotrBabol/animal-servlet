@@ -17,7 +17,7 @@
 <body>
 <h1>list</h1>
 <div class="table-responsive container">
-    <p>you cannot edit and remove first 6 initial animals</p>
+    <p>you cannot remove first 6 initial animals</p>
     <table class="table">
         <tr>
             <th>name</th>

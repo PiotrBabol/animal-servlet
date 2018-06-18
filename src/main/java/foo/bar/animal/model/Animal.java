@@ -1,8 +1,5 @@
 package foo.bar.animal.model;
 
-
-import foo.bar.animal.service.AnimalService;
-
 import java.io.Serializable;
 import java.util.UUID;
 
